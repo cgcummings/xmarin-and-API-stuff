@@ -49,6 +49,7 @@ namespace MobileAPI.Controllers
         }
 
         // PUT: api/Recipes/5
+        // user specific edit
         [ResponseType(typeof(void))]
         public IHttpActionResult PutRecipes(int id, Recipes recipes)
         {
@@ -60,6 +61,13 @@ namespace MobileAPI.Controllers
             if (id != recipes.ID)
             {
                 return BadRequest();
+            }
+
+            var userID = User.Identity.GetUserId();
+
+            if (userID != recipes.UserId)
+            {
+                return StatusCode(HttpStatusCode.Conflict);
             }
 
             db.Entry(recipes).State = EntityState.Modified;
@@ -110,6 +118,13 @@ namespace MobileAPI.Controllers
             if (recipes == null)
             {
                 return NotFound();
+            }
+
+            var userID = User.Identity.GetUserId();
+
+            if (userID != recipes.UserId)
+            {
+                return StatusCode(HttpStatusCode.Conflict);
             }
 
             db.Recipes.Remove(recipes);

@@ -12,6 +12,20 @@ namespace PhoneApp.Services
     public class APIServices
     {
 
+
+        public async Task<List<Recipes>> GetRecipesAsync(string accessToken)
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+
+           var json = await client.GetStringAsync("http://10.0.0.12:80/api/Recipes");
+
+            var recipes = JsonConvert.DeserializeObject<List<Recipes>>(json);
+
+            return recipes;
+
+        }
+
         public async Task LoginAsync(string username, string password)
         {
             var keyValues = new List<KeyValuePair<string, string>>
