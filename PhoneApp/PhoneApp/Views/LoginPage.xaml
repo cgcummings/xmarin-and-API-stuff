@@ -5,10 +5,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="PhoneApp.Views.LoginPage"
-             Shell.NavBarIsVisible="False">
-    <ContentPage.Content>
+             Shell.NavBarIsVisible="False"
+             xmlns:viewModels="clr-namespace:PhoneApp.ViewModels;assembly=PhoneApp">
+
+    <ContentPage.BindingContext>
+        <viewModels:LoginViewModel/>
+    </ContentPage.BindingContext>
+        <ContentPage.Content>
         <StackLayout Padding="10,0,10,0" VerticalOptions="Center">
+            <Entry Text="{Binding Email}"/>
+            <Entry Text="{Binding Password}" IsPassword="True" />
             <Button VerticalOptions="Center" Text="Login" Command="{Binding LoginCommand}"/>
+            <Label Text="OR"  />
             <Button VerticalOptions="Center" Text="Register" Command="{Binding GoToRegistration}"/>
         </StackLayout>
     </ContentPage.Content>

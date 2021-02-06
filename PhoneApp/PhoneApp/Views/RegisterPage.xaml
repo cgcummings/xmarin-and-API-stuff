@@ -13,6 +13,9 @@
         <Entry Text="{Binding Password}" Placeholder="password" IsPassword="True"/>
         <Entry Text="{Binding ConfirmPassword}" Placeholder="confirm password" IsPassword="True"/>
         <Button Command="{Binding RegisterCommand}" Text="Register"/>
+        <Label Text="{Binding Message}"/>
+
+        <Button Text="Go to Login page" Clicked="Button_Clicked" />
     </StackLayout>
     <!--<ContentPage.Content>
         <StackLayout>

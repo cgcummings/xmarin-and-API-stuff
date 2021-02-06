@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -10,6 +11,31 @@ namespace PhoneApp.Services
 {
     public class APIServices
     {
+
+        public async Task LoginAsync(string username, string password)
+        {
+            var keyValues = new List<KeyValuePair<string, string>>
+            {
+                new KeyValuePair<string, string>("username", username),
+                new KeyValuePair<string, string>("password", password),
+                new KeyValuePair<string, string>("grant_type", "password")
+            };
+
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://10.0.0.12:80/Token");
+
+            request.Content = new FormUrlEncodedContent(keyValues);
+
+            var client = new HttpClient();
+
+            var response = await client.SendAsync(request);
+
+            var content = await response.Content.ReadAsStringAsync();
+
+            Debug.WriteLine(content);
+
+
+        }
+
         public async Task<bool> RegisterAsync(string email, string password, string confirmPassword)
         {
           

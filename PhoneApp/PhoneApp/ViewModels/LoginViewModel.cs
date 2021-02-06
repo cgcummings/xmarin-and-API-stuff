@@ -17,14 +17,25 @@ namespace PhoneApp.ViewModels
 
         public string Password { get; set; }
 
-        public string ConfirmPassword { get; set; }
-        public string Message { get; set; }
-        public Command LoginCommand { get; }
+      
+        //public Command LoginCommand { get; }
 
-        public LoginViewModel()
+        //public LoginViewModel()
+        //{
+        //    LoginCommand = new Command(OnLoginClicked);
+        //}
+
+        public ICommand LoginCommand
         {
-            LoginCommand = new Command(OnLoginClicked);
+            get
+            {
+                return new Command(async() =>
+                {
+                    await _apiServices.LoginAsync(Email, Password);
+                });
+            }
         }
+
         public ICommand GoToRegistration
         {
             get
