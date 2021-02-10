@@ -3,12 +3,15 @@ using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using PhoneApp.Services;
 
 namespace PhoneApp.ViewModels
 {
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class ItemDetailViewModel : BaseViewModel
     {
+        APIServices _apiServices = new APIServices();
+
         private string itemId;
         private string text;
         private string description;
@@ -43,9 +46,10 @@ namespace PhoneApp.ViewModels
         {
             try
             {
-                var item = await DataStore.GetItemAsync(itemId);
-                Id = item.Id;
-                Text = item.Text;
+                var item = await _apiServices.GetRecipesByIDAsync(Int32.Parse(itemId));
+            
+                Id = item.ID.ToString();
+                Text = item.Ingredients;
                 Description = item.Description;
             }
             catch (Exception)

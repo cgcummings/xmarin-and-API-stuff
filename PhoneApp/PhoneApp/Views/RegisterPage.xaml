@@ -8,15 +8,34 @@
         <viewModels:RegisterViewModel/>
     </ContentPage.BindingContext>
 
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
     <StackLayout Orientation="Vertical">
+        <StackLayout BackgroundColor="{StaticResource Accent}" Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+            <ContentView Padding="40,0,40,0" VerticalOptions="FillAndExpand">
+
+                <Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64" />
+            </ContentView>
+
+        </StackLayout>
+
+
         <Entry Text="{Binding Email}" Placeholder="email"/>
         <Entry Text="{Binding Password}" Placeholder="password" IsPassword="True"/>
         <Entry Text="{Binding ConfirmPassword}" Placeholder="confirm password" IsPassword="True"/>
         <Button Command="{Binding RegisterCommand}" Text="Register"/>
         <Label Text="{Binding Message}"/>
 
-        <Button Text="Go to Login page" Clicked="Button_Clicked" />
+        <!--<Button Text="Go to Login page" Clicked="Button_Clicked" />-->
     </StackLayout>
+
+
     <!--<ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Xamarin.Forms!"

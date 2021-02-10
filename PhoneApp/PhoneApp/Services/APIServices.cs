@@ -13,12 +13,30 @@ namespace PhoneApp.Services
     {
 
 
+        public async Task<Recipes> GetRecipesByIDAsync(int RecipeID)
+        {
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Globals.Token);
+
+
+            string queryString = "http://10.0.0.12:80/api/Recipes/ByID?ID=" + RecipeID.ToString(); 
+            var response = await client.GetAsync(queryString);
+
+            var content = await response.Content.ReadAsStringAsync();
+
+
+            var recipe = JsonConvert.DeserializeObject<Recipes>(content);
+
+            return recipe;
+
+        }
+
         public async Task<List<Recipes>> GetRecipesAsync()
         {
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Globals.Token);
 
-           var json = await client.GetStringAsync("http://10.0.0.12:80/api/Recipes");
+            var json = await client.GetStringAsync("http://10.0.0.12:80/api/Recipes");
 
             var recipes = JsonConvert.DeserializeObject<List<Recipes>>(json);
 
@@ -45,6 +63,8 @@ namespace PhoneApp.Services
 
             var content = await response.Content.ReadAsStringAsync();
 
+
+            //Error handle bad log in 
             var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(content);
 
 

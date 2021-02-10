@@ -27,7 +27,8 @@ namespace PhoneApp.ViewModels
                       Email, Password, ConfirmPassword);
                     if (isSuccess)
                     {
-                        Message = "Registered successfully";
+                        await _apiServices.LoginAsync(Email, Password);
+                        App.Current.MainPage = new AppShell();
                     }
                     else
                     {

@@ -15,7 +15,10 @@
     <ContentPage.BindingContext>
         <viewModels:RecipesViewModel/>
     </ContentPage.BindingContext>
-        <ContentPage.Content>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
         <StackLayout>
             <Label Text="My Recipes"
                 VerticalOptions="CenterAndExpand" 
@@ -34,10 +37,7 @@
                                         <TapGestureRecognizer Command="{Binding GetRecipesCommand}" />
                                     </Label.GestureRecognizers>
                                 </Label>
-                                <!--<Label Text="{Binding Description }"/>
-                                <Label Text="{Binding Ingredients }"/>
-                                <Label Text="{Binding Instruction }"/>
-                                <Label Text="{Binding Title }"/>-->
+                        
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

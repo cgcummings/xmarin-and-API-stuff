@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 
 using PhoneApp.Services;
+using Android.Content.Res;
 
 namespace PhoneApp.ViewModels
 {
@@ -17,7 +18,7 @@ namespace PhoneApp.ViewModels
 
         public string Password { get; set; }
 
-      
+
         //public Command LoginCommand { get; }
 
         //public LoginViewModel()
@@ -29,9 +30,15 @@ namespace PhoneApp.ViewModels
         {
             get
             {
-                return new Command(async() =>
+                return new Command(async () =>
                 {
                     await _apiServices.LoginAsync(Email, Password);
+                    //Shell.PushAsync(new Recipes());
+                    if (Models.Globals.Token != null)
+                    {
+                        App.Current.MainPage = new AppShell();
+                    }
+
                 });
             }
         }
@@ -45,13 +52,20 @@ namespace PhoneApp.ViewModels
                     await Shell.Current.GoToAsync("//Register");
                     
 
+
                 });
             }
         }
-        private async void OnLoginClicked(object obj)
-        {
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
-        }
+        //private async void OnLoginClicked(object obj)
+        //{
+        //    // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+        //    await _apiServices.LoginAsync(Email, Password);
+
+        //    if(Models.Globals.Token != null)
+        //    {
+               
+        //    }
+           
+        //}
     }
 }

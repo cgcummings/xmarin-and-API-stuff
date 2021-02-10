@@ -5,25 +5,28 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using PhoneApp.Services;
 
 namespace PhoneApp.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        private Item _selectedItem;
 
-        public ObservableCollection<Item> Items { get; }
+        APIServices _apiServices = new APIServices();
+        private Models.Recipes _selectedItem;
+
+        public ObservableCollection<Models.Recipes> Items { get; }
         public Command LoadItemsCommand { get; }
         public Command AddItemCommand { get; }
-        public Command<Item> ItemTapped { get; }
+        public Command<Models.Recipes> ItemTapped { get; }
 
         public ItemsViewModel()
         {
-            Title = "Browse";
-            Items = new ObservableCollection<Item>();
+            Title = "Recipes";
+            Items = new ObservableCollection<Models.Recipes>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            ItemTapped = new Command<Item>(OnItemSelected);
+            ItemTapped = new Command<Models.Recipes>(OnItemSelected);
 
             AddItemCommand = new Command(OnAddItem);
         }
@@ -35,7 +38,7 @@ namespace PhoneApp.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                var items = await _apiServices.GetRecipesAsync();
                 foreach (var item in items)
                 {
                     Items.Add(item);
@@ -57,7 +60,7 @@ namespace PhoneApp.ViewModels
             SelectedItem = null;
         }
 
-        public Item SelectedItem
+        public Models.Recipes SelectedItem
         {
             get => _selectedItem;
             set
@@ -72,13 +75,13 @@ namespace PhoneApp.ViewModels
             await Shell.Current.GoToAsync(nameof(NewItemPage));
         }
 
-        async void OnItemSelected(Item item)
+        async void OnItemSelected(Models.Recipes item)
         {
             if (item == null)
                 return;
 
             // This will push the ItemDetailPage onto the navigation stack
-            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.Id}");
+            await Shell.Current.GoToAsync($"{nameof(ItemDetailPage)}?{nameof(ItemDetailViewModel.ItemId)}={item.ID}");
         }
     }
 }
