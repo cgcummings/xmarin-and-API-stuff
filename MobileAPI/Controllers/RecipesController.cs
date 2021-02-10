@@ -19,6 +19,16 @@ namespace MobileAPI.Controllers
     {
         private RecipesContext db = new RecipesContext();
 
+
+     //GET: ByID
+        [Route("api/Recipes/ByID")]
+        public IQueryable<Recipes> GetRecipesByID(int RecipeID)
+        {
+           
+
+            return db.Recipes.Where(recipe => recipe.ID == RecipeID);
+        }
+
         // GET: api/Recipes
         [Route("api/Recipes/ForCurrentUser")]
         public IQueryable<Recipes> GetRecipesForCurrentUser()

@@ -4,7 +4,14 @@
              x:Class="PhoneApp.Views.Recipes"
              xmlns:viewModels="clr-namespace:PhoneApp.ViewModels;assembly=PhoneApp">
 
-
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="StackStyle" TargetType="StackLayout">
+                <!--<Setter Property="BackgroundColor" Value="#4b69a0"/>-->
+            </Style>
+ 
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.BindingContext>
         <viewModels:RecipesViewModel/>
     </ContentPage.BindingContext>
@@ -14,18 +21,23 @@
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
 
-            <Entry Text="{Binding AccessToken}"/>
-            <Button Command="{Binding GetRecipesCommand}" Text="Get Recipes"/>
-            <ListView ItemsSource="{Binding Recipes}" HasUnevenRows="True">
+      
+           
+            <ListView x:Name="RecipeListView" ItemsSource="{Binding Recipes}" HasUnevenRows="True">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                            <!--<StackLayout Style="{StaticResource StackStyle}">-->
                             <StackLayout>
-                                <Label Text="{Binding Title }"/>
-                                <Label Text="{Binding Description }"/>
+                                <Label Text="{Binding Title }" FontSize="Large">
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding GetRecipesCommand}" />
+                                    </Label.GestureRecognizers>
+                                </Label>
+                                <!--<Label Text="{Binding Description }"/>
                                 <Label Text="{Binding Ingredients }"/>
                                 <Label Text="{Binding Instruction }"/>
-                                <Label Text="{Binding Title }"/>
+                                <Label Text="{Binding Title }"/>-->
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>

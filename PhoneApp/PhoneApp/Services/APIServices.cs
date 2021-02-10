@@ -13,10 +13,10 @@ namespace PhoneApp.Services
     {
 
 
-        public async Task<List<Recipes>> GetRecipesAsync(string accessToken)
+        public async Task<List<Recipes>> GetRecipesAsync()
         {
             var client = new HttpClient();
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Globals.Token);
 
            var json = await client.GetStringAsync("http://10.0.0.12:80/api/Recipes");
 
@@ -45,7 +45,10 @@ namespace PhoneApp.Services
 
             var content = await response.Content.ReadAsStringAsync();
 
-            Debug.WriteLine(content);
+            var values = JsonConvert.DeserializeObject<Dictionary<string, string>>(content);
+
+
+            Globals.Token = values["access_token"];
 
 
         }

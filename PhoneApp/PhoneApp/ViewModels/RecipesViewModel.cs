@@ -1,14 +1,12 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
 using PhoneApp.Models;
-using Xamarin.Forms;
 using PhoneApp.Services;
 using System.Runtime.CompilerServices;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using PropertyChangingEventArgs = System.ComponentModel.PropertyChangingEventArgs;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace PhoneApp.ViewModels
 {
@@ -17,7 +15,7 @@ namespace PhoneApp.ViewModels
         APIServices _apiServices = new APIServices();
         public List<Recipes> recipes;
 
-        public string AccessToken { get; set; }
+        //public string AccessToken { get; set; }
 
         public List<Recipes> Recipes { 
          get { return recipes; }
@@ -34,7 +32,9 @@ namespace PhoneApp.ViewModels
             {
                 return new Command(async () =>
                 {
-                    Recipes = await _apiServices.GetRecipesAsync(AccessToken);
+
+
+                    Recipes = await _apiServices.GetRecipesAsync();
                 });
             }
         }

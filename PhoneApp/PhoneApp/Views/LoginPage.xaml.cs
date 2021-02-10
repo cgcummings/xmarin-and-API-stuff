@@ -6,12 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using PhoneApp.Services;
 
 namespace PhoneApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
+
+        APIServices _apiServices = new APIServices();
+
         public LoginPage()
         {
             InitializeComponent();
@@ -21,6 +25,7 @@ namespace PhoneApp.Views
         private async void Button_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Recipes());
+
         }
     }
 }
