@@ -13,13 +13,35 @@ namespace PhoneApp.Services
     {
 
 
+ 
+
+        public async Task<bool> AddRecipeAsync(Recipes recipes)
+        {
+
+            var client = new HttpClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Globals.Token);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+            string queryString = "http://10.0.0.8:80/api/Recipes";
+
+            var json = JsonConvert.SerializeObject(recipes);
+
+            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync(queryString, content);
+
+
+            return response.IsSuccessStatusCode;
+
+        }
+
         public async Task<Recipes> GetRecipesByIDAsync(int RecipeID)
         {
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Globals.Token);
 
 
-            string queryString = "http://10.0.0.12:80/api/Recipes/ByID?ID=" + RecipeID.ToString(); 
+            string queryString = "http://10.0.0.8:80/api/Recipes/ByID?ID=" + RecipeID.ToString(); 
             var response = await client.GetAsync(queryString);
 
             var content = await response.Content.ReadAsStringAsync();
@@ -36,7 +58,7 @@ namespace PhoneApp.Services
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Globals.Token);
 
-            var json = await client.GetStringAsync("http://10.0.0.12:80/api/Recipes");
+            var json = await client.GetStringAsync("http://10.0.0.8:80/api/Recipes");
 
             var recipes = JsonConvert.DeserializeObject<List<Recipes>>(json);
 
@@ -53,7 +75,7 @@ namespace PhoneApp.Services
                 new KeyValuePair<string, string>("grant_type", "password")
             };
 
-            var request = new HttpRequestMessage(HttpMethod.Post, "http://10.0.0.12:80/Token");
+            var request = new HttpRequestMessage(HttpMethod.Post, "http://10.0.0.8:80/Token");
 
             request.Content = new FormUrlEncodedContent(keyValues);
 
@@ -69,6 +91,11 @@ namespace PhoneApp.Services
 
 
             Globals.Token = values["access_token"];
+            if(Globals.Token != null)
+            {
+                Globals.CurrentUserName = username;
+            }
+        
 
 
         }
@@ -92,7 +119,7 @@ namespace PhoneApp.Services
 
             HttpContent content = new StringContent(json,Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync("http://10.0.0.12:80/api/Account/Register", content);
+            var response = await client.PostAsync("http://10.0.0.8:80/api/Account/Register", content);
        
             return response.IsSuccessStatusCode;
             

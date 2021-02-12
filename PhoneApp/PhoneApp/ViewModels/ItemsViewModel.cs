@@ -22,7 +22,7 @@ namespace PhoneApp.ViewModels
 
         public ItemsViewModel()
         {
-            Title = "Recipes";
+            Title =  Globals.CurrentUserName +"'s "+"Recipes" ;
             Items = new ObservableCollection<Models.Recipes>();
             LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 

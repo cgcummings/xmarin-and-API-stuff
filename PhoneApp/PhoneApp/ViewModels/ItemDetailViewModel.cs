@@ -15,6 +15,8 @@ namespace PhoneApp.ViewModels
         private string itemId;
         private string text;
         private string description;
+        private string ingredients;
+        private string instruction;
         public string Id { get; set; }
 
         public string Text
@@ -28,6 +30,20 @@ namespace PhoneApp.ViewModels
             get => description;
             set => SetProperty(ref description, value);
         }
+
+     
+        public string Ingredients
+        {
+            get => ingredients;
+            set => SetProperty(ref ingredients, value);
+        }
+
+        public string Instruction
+        {
+            get => instruction;
+            set => SetProperty(ref instruction, value);
+        }
+
 
         public string ItemId
         {
@@ -51,6 +67,8 @@ namespace PhoneApp.ViewModels
                 Id = item.ID.ToString();
                 Text = item.Ingredients;
                 Description = item.Description;
+                Instruction = item.Instruction;
+                Ingredients = item.Ingredients;
             }
             catch (Exception)
             {

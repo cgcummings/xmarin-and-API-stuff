@@ -9,6 +9,10 @@
         <Label Text="{Binding Text}" FontSize="Small"/>
         <Label Text="Instruction:" FontSize="Medium" />
         <Label Text="{Binding Description}" FontSize="Small"/>
+        <Label Text="Ingredients:" FontSize="Medium" />
+        <Label Text="{Binding Ingredients}" FontSize="Small"/>
+        <Label Text="Instructions:" FontSize="Medium" />
+        <Label Text="{Binding Instruction}" FontSize="Small"/>
     </StackLayout>
     
 </ContentPage>

@@ -16,7 +16,7 @@ namespace PhoneApp.ViewModels
         public List<Recipes> recipes;
 
         //public string AccessToken { get; set; }
-
+        public string UserName { get; set; }
         public List<Recipes> Recipes { 
          get { return recipes; }
             set

@@ -7,5 +7,6 @@ namespace PhoneApp.Models
    public class Globals
     {
         public static string Token;
+        public static string CurrentUserName;
     }
 }
