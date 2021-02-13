@@ -13,6 +13,26 @@ namespace PhoneApp.Services
     {
 
 
+
+        public async Task<bool> UpdateRecipeAsync(string id, Recipes recipes)
+        {
+            var client = new HttpClient();
+            recipes.ID = Int32.Parse(id);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Globals.Token);
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+
+            string queryString = "http://10.0.0.8:80/api/Recipes" ;
+
+            var json = JsonConvert.SerializeObject(recipes);
+
+            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PutAsync(queryString, content);
+
+            var message = response.StatusCode;
+
+            return response.IsSuccessStatusCode;
+        }
  
 
         public async Task<bool> AddRecipeAsync(Recipes recipes)

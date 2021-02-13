@@ -60,25 +60,20 @@ namespace MobileAPI.Controllers
 
         // PUT: api/Recipes/5
         // user specific edit
+  
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutRecipes(int id, Recipes recipes)
+        public IHttpActionResult PutRecipes(Recipes recipes)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != recipes.ID)
-            {
-                return BadRequest();
-            }
-
             var userID = User.Identity.GetUserId();
+            recipes.UserId = userID;
+          
 
-            if (userID != recipes.UserId)
-            {
-                return StatusCode(HttpStatusCode.Conflict);
-            }
+   
 
             db.Entry(recipes).State = EntityState.Modified;
 
@@ -88,7 +83,7 @@ namespace MobileAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!RecipesExists(id))
+                if (!RecipesExists(recipes.ID))
                 {
                     return NotFound();
                 }

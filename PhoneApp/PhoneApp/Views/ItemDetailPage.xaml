@@ -5,14 +5,18 @@
              Title="{Binding Title}">
 
     <StackLayout Spacing="20" Padding="15">
-        <Label Text="Ingredients:" FontSize="Medium" />
-        <Label Text="{Binding Text}" FontSize="Small"/>
+        <Label Text="Title:" FontSize="Medium" />
+        <Editor Text="{Binding Text}" FontSize="Small"/>
         <Label Text="Instruction:" FontSize="Medium" />
-        <Label Text="{Binding Description}" FontSize="Small"/>
+        <Editor Text="{Binding Description}" FontSize="Small"/>
         <Label Text="Ingredients:" FontSize="Medium" />
-        <Label Text="{Binding Ingredients}" FontSize="Small"/>
+        <Editor Text="{Binding Ingredients}" FontSize="Small"/>
         <Label Text="Instructions:" FontSize="Medium" />
-        <Label Text="{Binding Instruction}" FontSize="Small"/>
+        <Editor Text="{Binding Instruction}" FontSize="Small"/>
+        <StackLayout Orientation="Horizontal">
+            <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="FillAndExpand"></Button>
+            <Button Text="Save" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand"></Button>
+        </StackLayout>
     </StackLayout>
-    
+
 </ContentPage>

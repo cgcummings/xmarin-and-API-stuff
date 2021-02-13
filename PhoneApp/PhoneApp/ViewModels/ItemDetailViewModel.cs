@@ -11,6 +11,14 @@ namespace PhoneApp.ViewModels
     public class ItemDetailViewModel : BaseViewModel
     {
         APIServices _apiServices = new APIServices();
+        public ItemDetailViewModel()
+        {
+            SaveCommand = new Command(OnSave);
+            CancelCommand = new Command(OnCancel);
+            this.PropertyChanged +=
+               (_, __) => SaveCommand.ChangeCanExecute();
+        }
+
 
         private string itemId;
         private string text;
@@ -45,6 +53,15 @@ namespace PhoneApp.ViewModels
         }
 
 
+        public Command CancelCommand { get; }
+        public Command SaveCommand { get; }
+
+        private async void OnCancel()
+        {
+            // This will pop the current page off the navigation stack
+            await Shell.Current.GoToAsync("..");
+        }
+
         public string ItemId
         {
             get
@@ -74,6 +91,29 @@ namespace PhoneApp.ViewModels
             {
                 Debug.WriteLine("Failed to Load Item");
             }
+        }
+
+
+        private async void OnSave()
+        {
+
+            Recipes UpdateRecipes = new Recipes()
+            {
+                Title = Title,
+                Description = Description,
+                Instruction = Instruction,
+                Ingredients = ingredients
+
+
+            };
+
+            //api service Update
+            await _apiServices.UpdateRecipeAsync(Id, UpdateRecipes);
+
+
+
+            // This will pop the current page off the navigation stack
+            await Shell.Current.GoToAsync("..");
         }
     }
 }
