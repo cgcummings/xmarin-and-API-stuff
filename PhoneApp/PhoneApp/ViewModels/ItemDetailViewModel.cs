@@ -82,7 +82,7 @@ namespace PhoneApp.ViewModels
                 var item = await _apiServices.GetRecipesByIDAsync(Int32.Parse(itemId));
             
                 Id = item.ID.ToString();
-                Text = item.Ingredients;
+                Text = item.Title;
                 Description = item.Description;
                 Instruction = item.Instruction;
                 Ingredients = item.Ingredients;
@@ -99,7 +99,7 @@ namespace PhoneApp.ViewModels
 
             Recipes UpdateRecipes = new Recipes()
             {
-                Title = Title,
+                Title = Text,
                 Description = Description,
                 Instruction = Instruction,
                 Ingredients = ingredients

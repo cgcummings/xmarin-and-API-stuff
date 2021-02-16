@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
+using System.Text;ons 
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PhoneApp.Models;
@@ -22,7 +22,7 @@ namespace PhoneApp.Services
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 
-            string queryString = "http://10.0.0.8:80/api/Recipes" ;
+            string queryString = "http://10.0.0.8:80/api/Recipes/Update?id="+id;
 
             var json = JsonConvert.SerializeObject(recipes);
 
@@ -78,7 +78,7 @@ namespace PhoneApp.Services
             var client = new HttpClient();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Globals.Token);
 
-            var json = await client.GetStringAsync("http://10.0.0.8:80/api/Recipes");
+            var json = await client.GetStringAsync("http://10.0.0.8:80/api/Recipes/ForCurrentUser");
 
             var recipes = JsonConvert.DeserializeObject<List<Recipes>>(json);
 

@@ -60,13 +60,17 @@ namespace MobileAPI.Controllers
 
         // PUT: api/Recipes/5
         // user specific edit
-  
+        [Route("api/Recipes/Update")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutRecipes(Recipes recipes)
+        public IHttpActionResult PutRecipes(int id, Recipes recipes)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+            if(id != recipes.ID)
+            {
+                return BadRequest();
             }
 
             var userID = User.Identity.GetUserId();

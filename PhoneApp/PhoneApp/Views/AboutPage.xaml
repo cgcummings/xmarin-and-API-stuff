@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PhoneApp.Views.AboutPage"
              xmlns:vm="clr-namespace:PhoneApp.ViewModels"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
     
     <ContentPage.BindingContext>
         <vm:AboutViewModel />
@@ -23,8 +24,13 @@
         <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
             <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
                 <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
-                    <!--<Label Text="Chef's Kiss" VerticalOptions="Center" HeightRequest="64"/>-->
+                    <!--<ffimageloadingsvg:SvgCachedImage BackgroundColor="Black" WidthRequest="350" HeightRequest="200" Source="resource://PhoneApp.Resources.ChefKissmockup.svg"/>-->
+         
+
+            
+         
                     <Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64" />
+                
                 </ContentView>
             </StackLayout>
         </StackLayout>
@@ -37,15 +43,21 @@
                         <FormattedString>
                             <FormattedString.Spans>
                                 <Span Text="Share with your friends "/>
-                                <Span Text="https://SharelinkTree" FontAttributes="Bold"/>
+                                
                             </FormattedString.Spans>
+                            
                         </FormattedString>
                     </Label.FormattedText>
+                    
                 </Label>
-                <Button Margin="0,10,0,0" Text="Learn more"
+                <Button Text="Share"   
+                   HorizontalOptions="Center"  
+                   VerticalOptions="Center"  
+                   Clicked="Button_Clicked"/>
+                <!--<Button Margin="0,10,0,0" Text="Learn more"
                         Command="{Binding OpenWebCommand}"
                         BackgroundColor="{StaticResource Primary}"
-                        TextColor="White" />
+                        TextColor="White" />-->
             </StackLayout>
         </ScrollView>
     </Grid>
