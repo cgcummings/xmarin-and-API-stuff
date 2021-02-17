@@ -328,9 +328,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50612</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:80/</IISUrl>
+          <IISUrl>https://localhost:1400/</IISUrl>
           <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
-          <IISAppRootUrl>https://localhost:80/</IISAppRootUrl>
+          <IISAppRootUrl>https://localhost:1400/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

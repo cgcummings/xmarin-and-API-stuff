@@ -60,10 +60,15 @@ namespace MobileAPI.Controllers
 
         // PUT: api/Recipes/5
         // user specific edit
-        [Route("api/Recipes/Update")]
+    
         [ResponseType(typeof(void))]
         public IHttpActionResult PutRecipes(int id, Recipes recipes)
         {
+            var userID = User.Identity.GetUserId();
+            recipes.UserId = userID;
+
+            recipes.UserId = userID;
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -73,11 +78,9 @@ namespace MobileAPI.Controllers
                 return BadRequest();
             }
 
-            var userID = User.Identity.GetUserId();
-            recipes.UserId = userID;
-          
+           
 
-   
+
 
             db.Entry(recipes).State = EntityState.Modified;
 

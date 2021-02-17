@@ -8,5 +8,6 @@ namespace PhoneApp.Models
     {
         public static string Token;
         public static string CurrentUserName;
+        public static string CurrentUserID;
     }
 }

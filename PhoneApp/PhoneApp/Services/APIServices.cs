@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;ons 
+using System.Text; 
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using PhoneApp.Models;
@@ -12,7 +12,7 @@ namespace PhoneApp.Services
     public class APIServices
     {
 
-
+        /*Need to send over the current user id in the recipes object before this request. make another service that gets the user id by username on login and sets it to a global variable */
 
         public async Task<bool> UpdateRecipeAsync(string id, Recipes recipes)
         {
@@ -22,11 +22,12 @@ namespace PhoneApp.Services
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 
-            string queryString = "http://10.0.0.8:80/api/Recipes/Update?id="+id;
+            string queryString = "http://10.0.0.8:80/api/Recipes/" + id;
 
             var json = JsonConvert.SerializeObject(recipes);
 
-            HttpContent content = new StringContent(json, Encoding.UTF8, "application/json");
+            HttpContent content = new StringContent(json);
+            content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
             var response = await client.PutAsync(queryString, content);
 
             var message = response.StatusCode;
